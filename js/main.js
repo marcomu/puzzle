@@ -3,7 +3,8 @@ $(document).ready(main);
 function main(){
 	var counter = [0];
 	var idDrag, idDrop;
-	var number = prompt("How many pieces do you want?");
+	var number = askPieces();
+
 	var pool = createPieces(number);
 	var poolDiv = $('#pool');
 	poolDiv.append(pool);
@@ -12,6 +13,18 @@ function main(){
 	dragDrop(idDrag, idDrop, counter, number);
 	
 }
+function askPieces(){
+	while(isNaN(p)){
+		var p = prompt("How many pieces do you want? 30 pieces max.");
+		while(p>30){
+			var p = prompt("How many pieces do you want? 30 pieces max.");
+		}
+	}
+	return p;
+	
+}
+
+
 function createPieces(number){
 	var pool = [];
 	var props, piece;
