@@ -1,6 +1,15 @@
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+
+/*
+CONTAINER
+*/
+.container{
+    background: #ccc;
+    padding: 20px;
+}
+
 .pool .col-piece{
     background: none;
     cursor:pointer;
@@ -26,6 +35,7 @@
 .puzzle .col-piece .shape{
     background: black;
 }
+
 
 
 

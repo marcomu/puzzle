@@ -1,15 +1,16 @@
 $(document).ready(main);
 
 function main(){
-	var counter = [0];
-	var idDrag, idDrop;
+	var counter,idDrag, idDrop;
 	var number = askForPieces();
-
+	
 	var pool = createPieces(number);
-	var poolDiv = $('#pool');
-	poolDiv.append(pool);
 	var puzzleDiv = $('#puzzle');
-	puzzleDiv.append(shuffle(pool));
+	puzzleDiv.append(pool);
+
+	var poolDiv = $('#pool');
+	poolDiv.append(shuffle(pool));
+	
 	dragDrop(idDrag, idDrop, counter, number);
 	
 }
@@ -32,7 +33,12 @@ function createPieces(number){
 		props = new Piece(getRandomInt(50, 100),getRandomInt(100, 150)); 
 		props.id = 'piece'+i;
 		//console.log(props);
-		piece = '<div class="col-piece col-xs-1"  id="'+props.id+'"><div class="shape" style="width:'+props.width+'px; height:'+props.height+'px;"></div></div>';
+		piece = '<div class="col-piece col-xs-1"><img alt="'
+						 + props.id + '" class="shape" style="width:'
+						 + props.width +
+						 'px; height:' +
+						 props.height +
+						 'px;"></div></div>';
 		pool.push(piece);
 	}
 	return pool;
@@ -42,18 +48,25 @@ function createPieces(number){
 function dragDrop(idDrag, idDrop, counter, number){
 	$('.pool .col-piece').draggable({
 		start: function(){
-			idDrag = $(this).attr("id");
+			idDrag = $(this);
+			console.log(idDrag);
 		},
 		snap: ".puzzle .col-piece"
-	})
+	});
+
 	$( ".puzzle .col-piece" ).droppable({
       drop: function(){
-     		idDrop = $(this).attr("id");
-     		if(idDrag == idDrop){
+     		idDrop = $(this);
+     		console.log(idDrop);
+     		if(idDrag.find(".shape").attr('alt') == idDrop.find(".shape").attr('alt')){
      			alert("It's a match!");
-     			$('#'+idDrag).draggable('disable');
-     			$('#'+idDrag).css('z-index',2);
-     			$('#'+idDrag).css('cursor','auto');
+     			//$('#'+idDrag).draggable('disable');
+     			//$('#'+idDrag).css('z-index',2);
+     			//$('#'+idDrag).css('cursor','auto');                                                                                                                          
+     			idDrag.draggable('disable');
+     			idDrag.css('z-index',2);
+     			idDrag.css('cursor','auto');
+
      			counter++;
      		}
      		if(counter>number-1){
