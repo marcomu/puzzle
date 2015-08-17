@@ -10,32 +10,40 @@ CONTAINER
     padding: 20px;
 }
 
-.pool .col-piece{
+.pool .white-piece{
     background: none;
-    cursor:pointer;
-    width: 160px;
-    height: 160px;
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
     border: 1px solid blue;
     z-index: 3;
     display: inline-block;
 }
-.pool .col-piece .shape{
+.pool .white-piece .shape{
     background: gray;
 }
-.puzzle .col-piece{
+.puzzle .black-piece{
     background: none;
     cursor:auto;
-    width: 160px;
-    height: 160px;
+    width: 100px;
+    height: 100px;
     border: 1px solid blue;
     z-index: 1;
     display: inline-block;
 }
 
-.puzzle .col-piece .shape{
+.puzzle .black-piece .shape{
     background: black;
 }
 
+canvas{
+    padding: 0;
+    margin: 0;
+}
+.white-piece{
+    padding: 0;
+    margin: 0;
+}
 
 
 
