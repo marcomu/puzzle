@@ -1,7 +1,7 @@
 $(document).ready(main);
 
 function main(){
-	var counter,idDrag, idDrop;
+	var idDrag, idDrop;
 	var number = askForPieces();
 	
 	var pool = createPieces(number);
@@ -11,7 +11,7 @@ function main(){
 	var poolDiv = $('#pool');
 	poolDiv.append(shuffle(pool));
 	
-	dragDrop(idDrag, idDrop, counter, number);
+	dragDrop(idDrag, idDrop, number);
 	
 }
 function askForPieces(){
@@ -22,9 +22,7 @@ function askForPieces(){
 		}
 	}
 	return p;
-	
 }
-
 
 function createPieces(number){
 	var pool = [];
@@ -45,11 +43,11 @@ function createPieces(number){
 }
 
 
-function dragDrop(idDrag, idDrop, counter, number){
+function dragDrop(idDrag, idDrop, number){
+	var counter = 0;
 	$('.pool .col-piece').draggable({
 		start: function(){
 			idDrag = $(this);
-			console.log(idDrag);
 		},
 		snap: ".puzzle .col-piece"
 	});
@@ -57,17 +55,15 @@ function dragDrop(idDrag, idDrop, counter, number){
 	$( ".puzzle .col-piece" ).droppable({
       drop: function(){
      		idDrop = $(this);
-     		console.log(idDrop);
      		if(idDrag.find(".shape").attr('alt') == idDrop.find(".shape").attr('alt')){
-     			alert("It's a match!");
-     			//$('#'+idDrag).draggable('disable');
-     			//$('#'+idDrag).css('z-index',2);
-     			//$('#'+idDrag).css('cursor','auto');                                                                                                                          
+     			alert('Is a match!');
      			idDrag.draggable('disable');
      			idDrag.css('z-index',2);
      			idDrag.css('cursor','auto');
-
+     			console.log(counter);
      			counter++;
+     			console.log(counter);
+
      		}
      		if(counter>number-1){
      			alert("Fin del juego!");
