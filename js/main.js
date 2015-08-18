@@ -1,12 +1,25 @@
+var m = 0;
+var s = 0;
+var t = 0;
 $(document).ready(main);
 
 function main(){
+	$('#new_game').on('click', newGame);
+
+}
+
+
+function newGame(){
+	clearTimer();
+	$('#time_label').html("00:00");
+	$('#puzzle').html("");
+	$('#pool').html("");
 	var idDrag, idDrop;
 	var number = askForPieces();
-	
 	createPuzzle(number);
-	
 	dragDrop(idDrag, idDrop, number);
+	startTime();
+
 	
 }
 function askForPieces(){
@@ -59,11 +72,11 @@ function createPuzzle(number){
 
 function dragDrop(idDrag, idDrop, number){
 	var counter = 0;
+	var attempt = 0;
 	$('.pool .white-piece').draggable({
 		start: function(){
 			idDrag = $(this);
 			pieceDrag = idDrag.find("canvas").attr('id');
-			console.log(idDrag);
 		},
 		snap: ".puzzle .black-piece"
 	});
@@ -71,13 +84,16 @@ function dragDrop(idDrag, idDrop, number){
 	$( ".puzzle .black-piece" ).droppable({
       drop: function(){
      		idDrop = $(this).hasClass(pieceDrag);
-     		console.log(idDrop);
+     		attempt++;
+     		$('#attempts_label').text(attempt);
+
      		if(idDrop){
-     			alert('Is a match!');
      			idDrag.draggable('disable');
      			idDrag.css('z-index',2);
      			idDrag.css('cursor','auto');
      			counter++;
+     			$('#score_label').text(counter);
+     			
 
      		}
      		if(counter>number-1){
@@ -87,11 +103,6 @@ function dragDrop(idDrag, idDrop, number){
 			tolerance: "fit"
     });
 }
-
-
-
-
-
 
 
 
@@ -113,4 +124,41 @@ function shuffle(array) {
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min +1)) + min;
+}
+
+
+function startTime() {
+    m = checkTime(m);
+    s = checkTime(s);
+    
+    $('#time_label').text(m+":"+s);
+    console.log(typeof m);
+    console.log(typeof s);
+    if(s<59){
+    	s++;
+    	if(typeof m == 'string'){
+    		m = parseInt(m);
+    	}
+    }else{
+    	s = 0;
+    	m++;
+    }
+
+    t = setTimeout(function(){startTime()},1000);
+   
+}
+
+function checkTime(i) {
+    if (i<10) {
+    	i = "0" + i
+    };  // add zero in front of numbers < 10
+    return i;
+}
+
+function clearTimer(){
+	if(t != 0){
+		clearTimeout(t);
+		m = 0;
+		s = 0;
+	}
 }
