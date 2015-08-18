@@ -1,6 +1,8 @@
 var m = 0;
 var s = 0;
 var t = 0;
+var counter = 0;
+var attempt = 0;
 $(document).ready(main);
 
 function main(){
@@ -11,24 +13,25 @@ function main(){
 
 function newGame(){
 	clearTimer();
-	$('#time_label').html("00:00");
+	resetMenu();
 	$('#puzzle').html("");
 	$('#pool').html("");
 	var idDrag, idDrop;
-	var number = askForPieces();
+/*	var number = askForPieces();
+*/
+	var number = 20;
 	createPuzzle(number);
 	dragDrop(idDrag, idDrop, number);
 	startTime();
-
-	
 }
-function askForPieces(){
+
+/*function askForPieces(){
 	while((isNaN(p)) || p > 20 || p == ""){
 		var p = prompt("How many pieces do you want? 20 pieces max.");
 	}
 	return p;
 }
-
+*/
 function createPuzzle(number){
 	var pool = [];
 	var puzzle = [];
@@ -71,8 +74,7 @@ function createPuzzle(number){
  
 
 function dragDrop(idDrag, idDrop, number){
-	var counter = 0;
-	var attempt = 0;
+	
 	$('.pool .white-piece').draggable({
 		start: function(){
 			idDrag = $(this);
@@ -87,21 +89,25 @@ function dragDrop(idDrag, idDrop, number){
      		attempt++;
      		$('#attempts_label').text(attempt);
 
-     		if(idDrop){
-     			idDrag.draggable('disable');
-     			idDrag.css('z-index',2);
-     			idDrag.css('cursor','auto');
-     			counter++;
-     			$('#score_label').text(counter);
-     			
-
-     		}
-     		if(counter>number-1){
-     			alert("Fin del juego!");
-     		}
+     		rate(idDrag, idDrop, number);
       },
 			tolerance: "fit"
     });
+}
+
+
+function rate(idDrag, idDrop, number){
+	if(idDrop){
+		idDrag.draggable('disable');
+		idDrag.css('z-index',2);
+		idDrag.css('cursor','auto');
+		counter++;
+		$('#score_label').text(counter);
+	}
+	if(counter>number-1){
+		alert("Fin del juego!");
+		clearTimer();
+	}
 }
 
 
@@ -132,8 +138,6 @@ function startTime() {
     s = checkTime(s);
     
     $('#time_label').text(m+":"+s);
-    console.log(typeof m);
-    console.log(typeof s);
     if(s<59){
     	s++;
     	if(typeof m == 'string'){
@@ -161,4 +165,12 @@ function clearTimer(){
 		m = 0;
 		s = 0;
 	}
+}
+
+function resetMenu(){
+	$('#time_label').html("00:00");
+	counter = 0;
+	attempt = 0;
+	$('#score_label').text(counter);
+	$('#attempts_label').text(attempt);
 }
