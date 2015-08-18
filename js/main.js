@@ -40,6 +40,13 @@ function createPuzzle(number){
 		
 		blackPiece = document.createElement('div');
 		$(blackPiece).addClass('black-piece col-xs-1 '+ props.id);
+
+		canvasBlack = document.createElement('canvas');
+		$(canvasBlack).text('unsupported browser').width(props.width).height(props.height).appendTo(blackPiece);
+		var ctxb = canvasBlack.getContext('2d');
+		ctxb.fillStyle = "black";
+		ctxb.fillRect(0, 0,100,100);
+
 		puzzle.push(blackPiece);
 	}
 
@@ -55,15 +62,17 @@ function dragDrop(idDrag, idDrop, number){
 	$('.pool .white-piece').draggable({
 		start: function(){
 			idDrag = $(this);
-/*			console.log(idDrag);*/
+			pieceDrag = idDrag.find("canvas").attr('id');
+			console.log(idDrag);
 		},
 		snap: ".puzzle .black-piece"
 	});
 
 	$( ".puzzle .black-piece" ).droppable({
       drop: function(){
-     		idDrop = $(this);
-     		if(idDrag.find(".shape").attr('alt') == idDrop.attr('id')){
+     		idDrop = $(this).hasClass(pieceDrag);
+     		console.log(idDrop);
+     		if(idDrop){
      			alert('Is a match!');
      			idDrag.draggable('disable');
      			idDrag.css('z-index',2);
