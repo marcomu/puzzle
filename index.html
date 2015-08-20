@@ -52,7 +52,7 @@
 	            <li><a href="#" >Attempts <span class="label label-default" id="attempts_label">0</span></a></li>
 	            <li><a href="#">Score <span class="label label-success" id="score_label">0</span></a></li>
 	            <li><a href="#">Time <span class="label label-default" id="time_label">00:00</span></a></li>
-	            <li><a href="#">Instructions</a></li>
+	            <li><a href="#" data-toggle="modal" data-target="#instructionsModal">Instructions</a></li>
 	          </ul>
 	        </div>
           <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -64,6 +64,24 @@
         				<div class="puzzle text-center" id="puzzle"></div>      					
       				</div>
           	</div>
+          </div>
+        </div>
+				
+        <!-- Modal -->
+        <div class="modal fade" id="instructionsModal" tabindex="-1" role="dialog" aria-labelledby="instructionsLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="instructionsLabel">Instructions</h4>
+              </div>
+              <div class="modal-body">
+                <p>Match the pairs. Drag the colored shape and drop in its pair.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
           </div>
         </div>
 
