@@ -7,10 +7,14 @@ $(document).ready(main);
 
 function main(){
 	$('#new_game').on('click', newGame);
+	
+
 }
 
 
 function newGame(){
+	$('.game .col-md-6').show();
+	$('.finish').remove();
 	clearTimer();
 	resetMenu();
 	$('#puzzle').html("");
@@ -64,9 +68,7 @@ function createPuzzle(number){
 
 		puzzle.push(blackPiece);
 	}
-
 	$('#pool').append(shuffle(pool));
-
 	$('#puzzle').append(puzzle);
 
 }
@@ -105,12 +107,24 @@ function rate(idDrag, idDrop, number){
 		counter++;
 		$('#score_label').text(counter);
 	}else{
-		$( idDrag ).effect( "shake", {distance:2});
+		$( idDrag ).effect( "shake", {distance:2, times:3});
 		$('body').effect('highlight', {color: "#FF8080"});
 	}
 	if(counter>number-1){
-		alert("Fin del juego!");
 		clearTimer();
+		$('.game .col-md-6').hide();
+		var game = document.createElement('div');
+		$(game).addClass('finish jumbotron text-center');
+		var title = document.createElement('h2');
+		var sc = document.createElement('p');
+		$(sc).html('Terminaste el puzzle en un tiempo de ' + $('#time_label').html() + ' segundos.' + '<p>¿Jugar de nuevo? <button class="btn btn-primary" id="re_new_game"> Si </button></p>');
+		
+		$(title).html('¡Felicidades!');
+		$(game).addClass('col-md-12');
+		$(game).append(title);
+		$(game).append(sc);
+		$('.game').append(game);
+		$('#re_new_game').on('click', newGame);
 	}
 }
 
