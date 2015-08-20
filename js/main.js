@@ -7,7 +7,6 @@ $(document).ready(main);
 
 function main(){
 	$('#new_game').on('click', newGame);
-
 }
 
 
@@ -88,8 +87,8 @@ function dragDrop(idDrag, idDrop, number){
      		idDrop = $(this).hasClass(pieceDrag);
      		attempt++;
      		$('#attempts_label').text(attempt);
-
      		rate(idDrag, idDrop, number);
+
       },
 			tolerance: "fit"
     });
@@ -98,11 +97,16 @@ function dragDrop(idDrag, idDrop, number){
 
 function rate(idDrag, idDrop, number){
 	if(idDrop){
+		$('body').effect('highlight');
+		$( idDrag ).fadeOut();
 		idDrag.draggable('disable');
 		idDrag.css('z-index',2);
 		idDrag.css('cursor','auto');
 		counter++;
 		$('#score_label').text(counter);
+	}else{
+		$( idDrag ).effect( "shake", {distance:2});
+		$('body').effect('highlight', {color: "#FF8080"});
 	}
 	if(counter>number-1){
 		alert("Fin del juego!");
