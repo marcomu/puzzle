@@ -13,6 +13,14 @@
     
     </head>
     <body>
+    	<div id="fb-root"></div>
+    	<script>(function(d, s, id) {
+    	  var js, fjs = d.getElementsByTagName(s)[0];
+    	  if (d.getElementById(id)) return;
+    	  js = d.createElement(s); js.id = id;
+    	  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+    	  fjs.parentNode.insertBefore(js, fjs);
+    	}(document, 'script', 'facebook-jssdk'));</script>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -36,8 +44,10 @@
 	                <li class="dropdown">
 	                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Share <span class="caret"></span></a>
 	                  <ul class="dropdown-menu">
-	                    <li><a href="#">Facebook</a></li>
-	                    <li><a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Score:20pts&hashtags=puzzle,webUIcertification">Tweet</a></li>
+	                    <li>
+	                    	<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="link"></div>
+	                    </li>
+	                    <li><a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=He jugado el Puzzle&hashtags=puzzle,webUIcertification">Tweet</a></li>
 	                  </ul>
 	                </li>
 	              </ul>
